@@ -15,9 +15,11 @@ ZSH_THEME_RUBY_PROMPT_SUFFIX=")"
 
 # Use diff --color if available
 if command diff --color /dev/null{,} &>/dev/null; then
-  function diff {
-    command diff --color "$@"
+  function color-diff {
+    diff --color $@
   }
+  alias diff="color-diff"
+  compdef _diff color-diff # compdef is already loaded by this point
 fi
 
 # Don't set ls coloring if disabled
